@@ -1,0 +1,25 @@
+{
+  "name": "learning-nodejs",
+  "version": "1.0.0",
+  "description": "Buiding a web service using nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liutongchen/learning-nodejs.git"
+  },
+  "author": "liutong chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liutongchen/learning-nodejs/issues"
+  },
+  "homepage": "https://github.com/liutongchen/learning-nodejs#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "mongoose": "^4.11.6"
+  }
+}
