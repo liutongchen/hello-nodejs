@@ -4,6 +4,7 @@ var express = require("express"),
 
 var db = mongoose.connect('mongodb://localhost/bookAPI');
 var Book = require("./models/bookModel");
+
 var app = express();
 var port = process.env.port || 3000;
 
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 
 var bookRouter = require("./Routes/bookRoutes")(Book);
 app.use("/api/books", bookRouter);
-app.use("/api/authors", authorRouter);
+//app.use("/api/authors", authorRouter);
 
 
 app.get("/", function(req, res) {
