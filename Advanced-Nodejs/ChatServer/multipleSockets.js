@@ -2,12 +2,6 @@ const server = require('net').createServer();
 let counter = 0;
 let sockets = {};
 
-function timestamp() {
-    "use strict";
-    const now = new Date();
-    return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-}
-
 server.on('connection', socket => {
     socket.id = counter++;
     sockets = {}; //only add sockets where user has input their names
@@ -25,7 +19,6 @@ server.on('connection', socket => {
         }
         Object.keys(sockets).map(key => sockets[key]).forEach((cs, index) => {
             if (index !== socket.id) {
-                cs.write(`${timestamp()}\n`);
                 cs.write(`${socket.name}: `);
                 cs.write(data);
             }
