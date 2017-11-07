@@ -11,14 +11,15 @@ server.on('connection', socket => {
 
     socket.on('data', data => {
         "use strict";
-        Object.entries(sockets).forEach((socket) => {
-            socket.write(`${socket.id}`);
-            socket.write(data);
+        Object.keys(sockets).map(key => sockets[key]).forEach((value) => {
+            value.write(`${socket.id}: `);
+            value.write(data);
         });
     });
 
     socket.on('end', () => {
         "use strict";
+        delete sockets[socket.id];
         console.log('Client disconnected');
     });
 });
