@@ -2,18 +2,33 @@ const server = require('net').createServer();
 let counter = 0;
 let sockets = {};
 
+function timestamp() {
+    "use strict";
+    const now = new Date();
+    return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+}
+
 server.on('connection', socket => {
     socket.id = counter++;
-    sockets[socket.id] = socket;
+    sockets = {}; //only add sockets where user has input their names
 
     console.log('Client connected');
-    socket.write('Welcome!\n');
+    socket.write('Please type your name\n');
 
     socket.on('data', data => {
         "use strict";
-        Object.keys(sockets).map(key => sockets[key]).forEach((value) => {
-            value.write(`${socket.id}: `);
-            value.write(data);
+        if (!sockets[socket.id]) {
+            socket.name = data.toString().trim();
+            socket.write(`Welcome ${socket.name}!\n`);
+            sockets[socket.id] = socket;
+            return;
+        }
+        Object.keys(sockets).map(key => sockets[key]).forEach((cs, index) => {
+            if (index !== socket.id) {
+                cs.write(`${timestamp()}\n`);
+                cs.write(`${socket.name}: `);
+                cs.write(data);
+            }
         });
     });
 
